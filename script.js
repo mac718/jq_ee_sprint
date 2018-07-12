@@ -161,6 +161,36 @@ $(document).ready(function() {
     hideTagBox(`.tag-box.${boxNumber}`);
   }
 
+  
+  let $panels = [$('#blue'), $('#red'), $('#yellow'), $('#green')];
+
+  let sequence = [0, 1, 2, 3];
+
+  //sequence.push(Math.floor(Math.random() * $panels.length));
+
+
+
+  var light = function(square){
+   $panels[sequence[square]].animate({
+        opacity: .5,
+      }).animate({
+        opacity: 1,
+      });
+    };
+
+    sequence.forEach(function(square, index){
+      light(square);
+      setTimeout(function(){console.log(this);}, 5000);
+    });
+  
+
+  $('#blue').mousedown(function() {
+    $(this).css('background-color', 'cyan');
+  });
+  $('#blue').mouseup(function() {
+    $(this).css('background-color', 'blue');
+  })
+
   characterCount($('#short_text'), 32, '#short_text_countdown');
   characterCount($('#long_text'), 140, '#long_text_countdown');
   characterCount($('#password'), 16, '#password_countdown');

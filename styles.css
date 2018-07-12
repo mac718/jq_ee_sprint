@@ -14,7 +14,38 @@
   width: 100px;
 }
 
-.photo-tags{
+.photo-tags {
   border: 8px solid blue;
   background-color: white;
+}
+
+#board {
+  height: 400px;
+  width: 400px;
+  margin: auto;
+}
+
+.panel {
+  height: 200px;
+  width: 200px;
+}
+
+#green {
+  background-color: green;
+  float: left;
+}
+
+#red {
+  background-color: red;
+  float: left;
+}
+
+#blue {
+  background-color: blue;
+  float: left;
+}
+
+#yellow {
+  background-color: yellow;
+  float: left;
 }

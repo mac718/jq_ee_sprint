@@ -169,19 +169,34 @@ $(document).ready(function() {
   //sequence.push(Math.floor(Math.random() * $panels.length));
 
 
-
-  var light = function(square){
-   $panels[sequence[square]].animate({
-        opacity: .5,
-      }).animate({
-        opacity: 1,
+  var dim = function(square){
+   $panels[sequence[square]].css({
+        opacity: .5
       });
     };
 
-    sequence.forEach(function(square, index){
-      light(square);
-      setTimeout(function(){console.log(this);}, 5000);
-    });
+  var light = function(square){
+    
+   $panels[sequence[square]].css({
+        opacity: 1.5
+      });
+    };
+
+   for ( let i = 0; i < sequence.length; i++ ) {
+    setTimeout( function(){
+      dim(i);
+      //light(i);
+    }, 1000*i+1);
+    };
+
+    
+
+    
+
+   // sequence.forEach(function(square){
+     
+      //setInterval( light(square), 10000*(square+1));
+    //});
   
 
   $('#blue').mousedown(function() {

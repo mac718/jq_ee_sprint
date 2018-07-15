@@ -176,19 +176,32 @@ $(document).ready(function() {
     };
 
   var light = function(square){
-    
    $panels[sequence[square]].css({
-        opacity: 1.5
+        opacity: 1
       });
     };
 
-   for ( let i = 0; i < sequence.length; i++ ) {
+  var squareSequence = function(num){  
+    dim(num);
     setTimeout( function(){
-      dim(i);
-      //light(i);
-    }, 1000*i+1);
-    };
+      light(num);
+    }, 1000);};
 
+
+    squareSequence(1);
+   //for ( let i = 0; i < sequence.length; i++ ) {
+    //setTimeout( function(){
+      //dim(i);
+      //light(i);
+    //}, 1000*i+1);
+    //};
+
+//     squareSequence(sequence[i]
+// function simonLights(seq, i) {
+// return if i > seq.len
+// squareSequence(seq[i])
+// setTimeout(simonLights, 1000, seq, i+1)
+// }
     
 
     

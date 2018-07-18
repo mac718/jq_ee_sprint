@@ -164,31 +164,32 @@ $(document).ready(function() {
   
   let $panels = [$('#blue'), $('#red'), $('#yellow'), $('#green')];
 
-  let sequence = [0, 1, 2, 3];
+  let sequence = [];
 
   //sequence.push(Math.floor(Math.random() * $panels.length));
 
 
   var dim = function(square){
-   $panels[sequence[square]].css({
-        opacity: .5
-      });
-    };
+    $panels[square].css({
+      opacity: .5
+    });
+  };
 
   var light = function(square){
-   $panels[sequence[square]].css({
-        opacity: 1
-      });
-    };
+    $panels[square].css({
+      opacity: 1
+    });
+  };
 
   var squareSequence = function(num){  
     dim(num);
     setTimeout( function(){
       light(num);
-    }, 1000);};
+    }, 1000);
+  };
 
 
-    squareSequence(1);
+    //squareSequence(1);
    //for ( let i = 0; i < sequence.length; i++ ) {
     //setTimeout( function(){
       //dim(i);
@@ -196,28 +197,63 @@ $(document).ready(function() {
     //}, 1000*i+1);
     //};
 
-//     squareSequence(sequence[i]
-// function simonLights(seq, i) {
-// return if i > seq.len
-// squareSequence(seq[i])
-// setTimeout(simonLights, 1000, seq, i+1)
-// }
-    
+    //squareSequence(sequence[i], 
 
-    
+  var simonLights = function(seq, i) {
+    if (seq[i] == undefined){
+      return;
+    } else {
+      squareSequence(seq[i])
+      setTimeout(simonLights, 1000, seq, i+1)
+    };
+  }
 
-   // sequence.forEach(function(square){
-     
-      //setInterval( light(square), 10000*(square+1));
-    //});
+  var playerRepeat = function() {
+    let playerRepeatSequence = [];
+
+    $('#blue').mousedown(function() {
+    $(this).css('background-color', 'cyan');
+    });
+    $('#blue').mouseup(function() {
+      $(this).css('background-color', 'blue');
+      playerRepeatSequence.push(0)
+    });
+    $('#green').mousedown(function() {
+      $(this).css('background-color', 'LightGreen');
+    });
+    $('#green').mouseup(function() {
+      $(this).css('background-color', 'green');
+      playerRepeatSequence.push(3)
+    });
+    $('#red').mousedown(function() {
+      $(this).css('background-color', 'pink');
+    });
+    $('#red').mouseup(function() {
+      $(this).css('background-color', 'red');
+      playerRepeatSequence.push(1)
+    });
+    $('#yellow').mousedown(function() {
+      $(this).css('background-color', 'LightYellow');
+    });
+    $('#yellow').mouseup(function() {
+      $(this).css('background-color', 'yellow');
+      playerRepeatSequence.push(2)
+    });
+  }
+
+  playerRepeat();
+
+
+  
+  $('#play').click(function(){
+    sequence.push(Math.floor(Math.random() * $panels.length));
+    simonLights(sequence, 0);
+  })
+
+  
   
 
-  $('#blue').mousedown(function() {
-    $(this).css('background-color', 'cyan');
-  });
-  $('#blue').mouseup(function() {
-    $(this).css('background-color', 'blue');
-  })
+  
 
   characterCount($('#short_text'), 32, '#short_text_countdown');
   characterCount($('#long_text'), 140, '#long_text_countdown');

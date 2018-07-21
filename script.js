@@ -208,47 +208,140 @@ $(document).ready(function() {
     };
   }
 
+  let playerRepeatSequence = [];
   var playerRepeat = function() {
-    let playerRepeatSequence = [];
 
-    $('#blue').mousedown(function() {
+    $('#blue').mousedown(function(e) {
     $(this).css('background-color', 'cyan');
+    //e.stopPropagation();
+      
     });
-    $('#blue').mouseup(function() {
+     $('#blue').mouseup( function(e) {
+      
       $(this).css('background-color', 'blue');
-      playerRepeatSequence.push(0)
+      e.stopPropagation();
+      playerRepeatSequence.push(0);
+      
+    
+      if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+        alert("Nope!");
+        return false;
+      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+        //return;
+      } else {
+        play();
+      };
+      //if (sequence.length == playerRepeatSequence.length) {
+        //return true;
+      //};
     });
-    $('#green').mousedown(function() {
+    $('#green').mousedown(function(e) {
       $(this).css('background-color', 'LightGreen');
+    //e.stopPropagation();
+      
     });
-    $('#green').mouseup(function() {
+     $('#green').mouseup( function(e) {
+      
       $(this).css('background-color', 'green');
-      playerRepeatSequence.push(3)
+      e.stopPropagation();
+      playerRepeatSequence.push(3);
+      
+
+      
+      if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+        alert("Nope!");
+        return false;
+      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+        //return;
+      } else {
+        play();
+      };
+      
+      //if (sequence.length == playerRepeatSequence.length) {
+        //return true;
+      //};
     });
-    $('#red').mousedown(function() {
+    $('#red').mousedown(function(e) {
       $(this).css('background-color', 'pink');
+    //e.stopPropagation();
+
     });
-    $('#red').mouseup(function() {
+      
+     $('#red').mouseup( function(e) {
+      
+
       $(this).css('background-color', 'red');
-      playerRepeatSequence.push(1)
+      e.stopPropagation();
+      playerRepeatSequence.push(1);
+    
+
+      
+      if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+        alert("Nope!");
+        return false;
+      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+        //return;
+      } else {
+        play();
+      };
     });
-    $('#yellow').mousedown(function() {
+      
+      
+      //if (sequence.length == playerRepeatSequence.length) {
+        //return true;
+      //};
+    $('#yellow').mousedown(function(e) {
       $(this).css('background-color', 'LightYellow');
+    //e.stopPropagation();
+       
     });
-    $('#yellow').mouseup(function() {
+    
+    $('#yellow').mouseup( function(e) {
+      //let i = 0;
+
       $(this).css('background-color', 'yellow');
-      playerRepeatSequence.push(2)
+      //if (i < 1){
+        e.stopPropagation();
+      playerRepeatSequence.push(2);
+    //};
+      //i++
+      
+
+      
+       if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+        alert("Nope!");
+        return false;
+      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+        //playerRepeat();
+      } else {
+        play();
+      };
+     
+      //if (sequence.length == playerRepeatSequence.length) {
+        //return true;
+      //};
     });
+    
   }
 
-  playerRepeat();
 
-
+  //playerRepeat();
   
-  $('#play').click(function(){
+
+  var play = function() {
+    playerRepeatSequence = [];
     sequence.push(Math.floor(Math.random() * $panels.length));
     simonLights(sequence, 0);
-  })
+    
+  }
+
+  //$('#play').click(function(){
+  //    play();
+  //  });
+playerRepeat();
+  play();
+
+  
 
   
   

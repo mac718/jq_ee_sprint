@@ -182,10 +182,10 @@ $(document).ready(function() {
   };
 
   var squareSequence = function(num){  
-    dim(num);
     setTimeout( function(){
-      light(num);
-    }, 1000);
+      dim(num);}, 500);
+    setTimeout( function(){
+      light(num);}, 1000);
   };
 
 
@@ -204,7 +204,7 @@ $(document).ready(function() {
       return;
     } else {
       squareSequence(seq[i])
-      setTimeout(simonLights, 1000, seq, i+1)
+      setTimeout(simonLights, 500, seq, i+1)
     };
   }
 
@@ -227,7 +227,7 @@ $(document).ready(function() {
         alert("Nope!");
         return false;
       } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-        //return;
+        return;
       } else {
         play();
       };
@@ -252,7 +252,7 @@ $(document).ready(function() {
         alert("Nope!");
         return false;
       } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-        //return;
+        return;
       } else {
         play();
       };
@@ -280,7 +280,7 @@ $(document).ready(function() {
         alert("Nope!");
         return false;
       } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-        //return;
+        return;
       } else {
         play();
       };
@@ -310,7 +310,7 @@ $(document).ready(function() {
       
        if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
         alert("Nope!");
-        return false;
+        return;
       } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
         //playerRepeat();
       } else {
@@ -339,7 +339,10 @@ $(document).ready(function() {
   //    play();
   //  });
 playerRepeat();
+$('#play').click( function() {
   play();
+})
+  
 
   
 

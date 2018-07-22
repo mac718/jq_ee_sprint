@@ -20,14 +20,19 @@
 }
 
 #board {
-  height: 400px;
-  width: 400px;
+  height: 408px;
+  width: 408px;
   margin: auto;
 }
 
 .panel {
   height: 200px;
   width: 200px;
+}
+
+#green, #red, #blue, #yellow {
+  border-radius: 10px;
+  border: 2px solid;
 }
 
 #green {
@@ -48,4 +53,16 @@
 #yellow {
   background-color: yellow;
   float: left;
+}
+
+#play-btn {
+  text-align: center;
+}
+
+#play {
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  margin-top: 20px;
+  background-color: red;
 }

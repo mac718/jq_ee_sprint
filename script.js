@@ -1,4 +1,9 @@
 $(document).ready(function() {
+
+  //===============
+  //Form Validation
+  //===============
+
   var characterCount = function( elem, maxChars, span_id) {
     $( elem ).keyup( function() {
       if ($(elem).val().length == 0) {
@@ -53,6 +58,10 @@ $(document).ready(function() {
     })
   };
 
+  //=============
+  //Dropdown Menu
+  //=============
+
   var dropdown = function() {
     $("#options").hide();
 
@@ -76,6 +85,10 @@ $(document).ready(function() {
       $("#options").slideUp();
     });
   }
+
+  //=============
+  //Photo Tagging
+  //=============
 
   var tagBoxHover = function( elem ){
     $('#MNS').mouseover( function(e){
@@ -160,13 +173,14 @@ $(document).ready(function() {
 
     hideTagBox(`.tag-box.${boxNumber}`);
   }
-
   
+  //=====
+  //Simon
+  //=====
+
   let $panels = [$('#blue'), $('#red'), $('#yellow'), $('#green')];
 
   let sequence = [];
-
-  //sequence.push(Math.floor(Math.random() * $panels.length));
 
 
   var dim = function(square){
@@ -188,17 +202,6 @@ $(document).ready(function() {
       light(num);}, 1000);
   };
 
-
-    //squareSequence(1);
-   //for ( let i = 0; i < sequence.length; i++ ) {
-    //setTimeout( function(){
-      //dim(i);
-      //light(i);
-    //}, 1000*i+1);
-    //};
-
-    //squareSequence(sequence[i], 
-
   var simonLights = function(seq, i) {
     if (seq[i] == undefined){
       return;
@@ -208,147 +211,123 @@ $(document).ready(function() {
     };
   }
 
+  var panelClick = function(panel, upPanelColor, downPanelColor, panelIndex) {
+    $(panel).mousedown(function(e) {
+      $(this).css('background-color', downPanelColor);  
+    });
+     $(panel).mouseup( function(e) {
+      let jPanel = $(panel);
+      
+      $(this).css('background-color', upPanelColor);
+      e.stopPropagation();
+      playerRepeatSequence.push(panelIndex);
+      
+    
+      if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+        alert("Nope!");
+        return false;
+      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+        return;
+      } else {
+        play();
+      };
+    });
+  }
+
   let playerRepeatSequence = [];
   var playerRepeat = function() {
 
-    $('#blue').mousedown(function(e) {
-    $(this).css('background-color', 'cyan');
-    //e.stopPropagation();
+    panelClick('#blue', 'blue', 'cyan', 0);
+    panelClick('#red', 'red', 'pink', 1);
+    panelClick('#yellow', 'yellow', 'LightYellow', 2);
+    panelClick('#green', 'green', 'LightGreen', 3);
+
+    // $('#blue').mousedown(function(e) {
+    //   $(this).css('background-color', 'cyan');  
+    // });
+    //  $('#blue').mouseup( function(e) {
       
-    });
-     $('#blue').mouseup( function(e) {
-      
-      $(this).css('background-color', 'blue');
-      e.stopPropagation();
-      playerRepeatSequence.push(0);
+    //   $(this).css('background-color', 'blue');
+    //   e.stopPropagation();
+    //   playerRepeatSequence.push(0);
       
     
-      if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-        alert("Nope!");
-        return false;
-      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-        return;
-      } else {
-        play();
-      };
-      //if (sequence.length == playerRepeatSequence.length) {
-        //return true;
-      //};
-    });
-    $('#green').mousedown(function(e) {
-      $(this).css('background-color', 'LightGreen');
-    //e.stopPropagation();
-      
-    });
-     $('#green').mouseup( function(e) {
-      
-      $(this).css('background-color', 'green');
-      e.stopPropagation();
-      playerRepeatSequence.push(3);
-      
-
-      
-      if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-        alert("Nope!");
-        return false;
-      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-        return;
-      } else {
-        play();
-      };
-      
-      //if (sequence.length == playerRepeatSequence.length) {
-        //return true;
-      //};
-    });
-    $('#red').mousedown(function(e) {
-      $(this).css('background-color', 'pink');
-    //e.stopPropagation();
-
-    });
-      
-     $('#red').mouseup( function(e) {
-      
-
-      $(this).css('background-color', 'red');
-      e.stopPropagation();
-      playerRepeatSequence.push(1);
+    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+    //     alert("Nope!");
+    //     return false;
+    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+    //     return;
+    //   } else {
+    //     play();
+    //   };
+    // });
     
-
+    // $('#green').mousedown(function(e) {
+    //   $(this).css('background-color', 'LightGreen');  
+    // });
+    // $('#green').mouseup( function(e) {
       
-      if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-        alert("Nope!");
-        return false;
-      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-        return;
-      } else {
-        play();
-      };
-    });
+    //   $(this).css('background-color', 'green');
+    //   e.stopPropagation();
+    //   playerRepeatSequence.push(3);
       
+    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+    //     alert("Nope!");
+    //     return false;
+    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+    //     return;
+    //   } else {
+    //     play();
+    //   };
+    // });
+    // $('#red').mousedown(function(e) {
+    //   $(this).css('background-color', 'pink');
+    // });
       
-      //if (sequence.length == playerRepeatSequence.length) {
-        //return true;
-      //};
-    $('#yellow').mousedown(function(e) {
-      $(this).css('background-color', 'LightYellow');
-    //e.stopPropagation();
-       
-    });
+    // $('#red').mouseup( function(e) {
+      
+    //   $(this).css('background-color', 'red');
+    //   e.stopPropagation();
+    //   playerRepeatSequence.push(1);
     
-    $('#yellow').mouseup( function(e) {
-      //let i = 0;
-
-      $(this).css('background-color', 'yellow');
-      //if (i < 1){
-        e.stopPropagation();
-      playerRepeatSequence.push(2);
-    //};
-      //i++
+    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+    //     alert("Nope!");
+    //     return false;
+    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+    //     return;
+    //   } else {
+    //     play();
+    //   };
+    // });
       
-
-      
-       if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-        alert("Nope!");
-        return;
-      } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-        //playerRepeat();
-      } else {
-        play();
-      };
-     
-      //if (sequence.length == playerRepeatSequence.length) {
-        //return true;
-      //};
-    });
+    // $('#yellow').mousedown(function(e) {
+    //   $(this).css('background-color', 'LightYellow');
+    // });
     
+    // $('#yellow').mouseup( function(e) {
+    
+    //   $(this).css('background-color', 'yellow');
+    //   e.stopPropagation();
+    //   playerRepeatSequence.push(2);
+      
+    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
+    //     alert("Nope!");
+    //     return;
+    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
+    //     return;
+    //   } else {
+    //     play();
+    //   };
+    // });
   }
-
-
-  //playerRepeat();
-  
 
   var play = function() {
     playerRepeatSequence = [];
     sequence.push(Math.floor(Math.random() * $panels.length));
     simonLights(sequence, 0);
-    
   }
 
-  //$('#play').click(function(){
-  //    play();
-  //  });
-playerRepeat();
-$('#play').click( function() {
-  play();
-})
   
-
-  
-
-  
-  
-
   
 
   characterCount($('#short_text'), 32, '#short_text_countdown');
@@ -359,4 +338,8 @@ $('#play').click( function() {
   validateForm();
   dropdown();
   situateTagBox();
+  playerRepeat();
+  $('#play').click( function() {
+    play();
+  });
 });

@@ -195,19 +195,31 @@ $(document).ready(function() {
     });
   };
 
-  var squareSequence = function(num){  
+  let dimTimeout;
+  let lightTimeout; 
+
+  var squareSequence = function(num){ 
+    if (round % 4 == 0) {
+      dimTimeout /= 1.15;
+      lightTimeout /= 1.15;
+    };
     setTimeout( function(){
-      dim(num);}, 500);
+      dim(num);}, dimTimeout);
     setTimeout( function(){
-      light(num);}, 1000);
+      light(num);}, lightTimeout);
   };
+
+  let timeout;
 
   var simonLights = function(seq, i) {
     if (seq[i] == undefined){
       return;
     } else {
+      if (round % 4 == 0) {
+        timeout /= 1.15;
+      };
       squareSequence(seq[i])
-      setTimeout(simonLights, 500, seq, i+1)
+      setTimeout(simonLights, timeout, seq, i+1)
     };
   }
 
@@ -235,100 +247,20 @@ $(document).ready(function() {
   }
 
   let playerRepeatSequence = [];
-  var playerRepeat = function() {
 
+  var playerRepeat = function() {
     panelClick('#blue', 'blue', 'cyan', 0);
     panelClick('#red', 'red', 'pink', 1);
     panelClick('#yellow', 'yellow', 'LightYellow', 2);
     panelClick('#green', 'green', 'LightGreen', 3);
-
-    // $('#blue').mousedown(function(e) {
-    //   $(this).css('background-color', 'cyan');  
-    // });
-    //  $('#blue').mouseup( function(e) {
-      
-    //   $(this).css('background-color', 'blue');
-    //   e.stopPropagation();
-    //   playerRepeatSequence.push(0);
-      
-    
-    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-    //     alert("Nope!");
-    //     return false;
-    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-    //     return;
-    //   } else {
-    //     play();
-    //   };
-    // });
-    
-    // $('#green').mousedown(function(e) {
-    //   $(this).css('background-color', 'LightGreen');  
-    // });
-    // $('#green').mouseup( function(e) {
-      
-    //   $(this).css('background-color', 'green');
-    //   e.stopPropagation();
-    //   playerRepeatSequence.push(3);
-      
-    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-    //     alert("Nope!");
-    //     return false;
-    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-    //     return;
-    //   } else {
-    //     play();
-    //   };
-    // });
-    // $('#red').mousedown(function(e) {
-    //   $(this).css('background-color', 'pink');
-    // });
-      
-    // $('#red').mouseup( function(e) {
-      
-    //   $(this).css('background-color', 'red');
-    //   e.stopPropagation();
-    //   playerRepeatSequence.push(1);
-    
-    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-    //     alert("Nope!");
-    //     return false;
-    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-    //     return;
-    //   } else {
-    //     play();
-    //   };
-    // });
-      
-    // $('#yellow').mousedown(function(e) {
-    //   $(this).css('background-color', 'LightYellow');
-    // });
-    
-    // $('#yellow').mouseup( function(e) {
-    
-    //   $(this).css('background-color', 'yellow');
-    //   e.stopPropagation();
-    //   playerRepeatSequence.push(2);
-      
-    //   if (playerRepeatSequence[playerRepeatSequence.length - 1] != sequence[playerRepeatSequence.length - 1]) {
-    //     alert("Nope!");
-    //     return;
-    //   } else if (playerRepeatSequence[playerRepeatSequence.length - 1] == sequence[playerRepeatSequence.length - 1] && playerRepeatSequence.length < sequence.length){
-    //     return;
-    //   } else {
-    //     play();
-    //   };
-    // });
   }
 
   var play = function() {
     playerRepeatSequence = [];
     sequence.push(Math.floor(Math.random() * $panels.length));
     simonLights(sequence, 0);
+    round++;
   }
-
-  
-  
 
   characterCount($('#short_text'), 32, '#short_text_countdown');
   characterCount($('#long_text'), 140, '#long_text_countdown');
@@ -339,7 +271,13 @@ $(document).ready(function() {
   dropdown();
   situateTagBox();
   playerRepeat();
+  let round;
   $('#play').click( function() {
+    round = 1;
+    dimTimeout = 500;
+    lightTimeout = 1000;
+    timeout = 1000; 
+    sequence = [];
     play();
   });
 });

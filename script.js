@@ -199,10 +199,10 @@ $(document).ready(function() {
   let lightTimeout; 
 
   var squareSequence = function(num){ 
-    if (round % 4 == 0) {
-      dimTimeout /= 1.15;
-      lightTimeout /= 1.15;
-    };
+    // if (round % 4 == 0) {
+    //   dimTimeout /= 1.15;
+    //   lightTimeout /= 1.15;
+    // };
     setTimeout( function(){
       dim(num);}, dimTimeout);
     setTimeout( function(){
@@ -215,9 +215,9 @@ $(document).ready(function() {
     if (seq[i] == undefined){
       return;
     } else {
-      if (round % 4 == 0) {
-        timeout /= 1.15;
-      };
+      // if (round % 4 == 0) {
+      //   timeout /= 1.15;
+      // };
       squareSequence(seq[i])
       setTimeout(simonLights, timeout, seq, i+1)
     };
@@ -259,6 +259,11 @@ $(document).ready(function() {
     playerRepeatSequence = [];
     sequence.push(Math.floor(Math.random() * $panels.length));
     simonLights(sequence, 0);
+    if (round % 4 == 0) {
+        timeout /= 1.65;
+        dimTimeout /= 1.65;
+        lightTimeout /= 1.65;
+      };
     round++;
   }
 

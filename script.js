@@ -199,10 +199,6 @@ $(document).ready(function() {
   let lightTimeout; 
 
   var squareSequence = function(num){ 
-    // if (round % 4 == 0) {
-    //   dimTimeout /= 1.15;
-    //   lightTimeout /= 1.15;
-    // };
     setTimeout( function(){
       dim(num);}, dimTimeout);
     setTimeout( function(){
@@ -212,15 +208,24 @@ $(document).ready(function() {
   let timeout;
 
   var simonLights = function(seq, i) {
+    //clearInterval(timer());
     if (seq[i] == undefined){
+      //timer();
       return;
     } else {
-      // if (round % 4 == 0) {
-      //   timeout /= 1.15;
-      // };
       squareSequence(seq[i])
       setTimeout(simonLights, timeout, seq, i+1)
     };
+  }
+
+  let countdown;
+
+  var timer = function(){
+    countdown = 0;
+    setInterval(function(){
+      $('#countdown').text(countdown);
+      countdown++;
+    }, 1000);
   }
 
   var panelClick = function(panel, upPanelColor, downPanelColor, panelIndex) {
@@ -228,7 +233,6 @@ $(document).ready(function() {
       $(this).css('background-color', downPanelColor);  
     });
      $(panel).mouseup( function(e) {
-      let jPanel = $(panel);
       
       $(this).css('background-color', upPanelColor);
       e.stopPropagation();
@@ -259,14 +263,13 @@ $(document).ready(function() {
     playerRepeatSequence = [];
     sequence.push(Math.floor(Math.random() * $panels.length));
     simonLights(sequence, 0);
-    if (round % 4 == 0) {
-        timeout /= 1.65;
-        dimTimeout /= 1.65;
-        lightTimeout /= 1.65;
-      };
+    //if (round % 4 == 0) {
+        timeout /= 1.2;
+        dimTimeout /= 1.2;
+        lightTimeout /= 1.2;
+      //};
     round++;
   }
-
   characterCount($('#short_text'), 32, '#short_text_countdown');
   characterCount($('#long_text'), 140, '#long_text_countdown');
   characterCount($('#password'), 16, '#password_countdown');

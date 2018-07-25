@@ -19,6 +19,15 @@
   background-color: white;
 }
 
+#countdown {
+  height: 100px;
+  width: 100px;
+  font-weight: bold;
+  margin: auto;
+  font-size: 50px;
+  text-align: center;
+}
+
 #board {
   height: 408px;
   width: 408px;

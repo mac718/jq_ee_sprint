@@ -270,6 +270,52 @@ $(document).ready(function() {
       //};
     round++;
   }
+  
+  //=========
+  //Duck Hunt
+  //=========
+
+  $('#duck-hunt-board').mouseover(function() {
+    $(this).css('cursor', 'crosshair');
+  });
+
+  $duck = $("<div id='duck'></div>");
+    $('#duck-hunt-board').append($duck);
+    $('#duck').animate({ right: "-=950"}, 6000).queue(function(){
+      $('#duck').remove();
+      $(this).dequeue();
+    });
+    $('#duck').click(function() {
+      $(this).clearQueue();
+      $(this).stop();
+      $(this).animate({ bottom: "-=500"}, 100).queue(function(){
+      $('#duck').remove();
+      $(this).dequeue();
+    });
+    });
+
+  setInterval( function(){ 
+    $duck = $("<div id='duck'></div>");
+    $('#duck-hunt-board').append($duck);
+    $('#duck').animate({ right: "-=950"}, 6000).queue(function(){
+      $('#duck').remove();
+      $(this).dequeue();
+    });
+    $('#duck').click(function() {
+      $(this).clearQueue();
+      $(this).stop();
+      $(this).animate({ bottom: "-=500"}, 100).queue(function(){
+      $('#duck').remove();
+      $(this).dequeue();
+    });
+    })
+    
+    //;
+  }, 6050);
+
+  
+  
+
   characterCount($('#short_text'), 32, '#short_text_countdown');
   characterCount($('#long_text'), 140, '#long_text_countdown');
   characterCount($('#password'), 16, '#password_countdown');

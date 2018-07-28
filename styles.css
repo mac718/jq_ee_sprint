@@ -81,3 +81,16 @@
   font-size: 28px;
   color: white;
 }
+
+#duck-hunt-board {
+  width: 1000px;
+  height: 1000px;
+  background-color: lightGrey;
+}
+
+#duck {
+  width: 50px;
+  height: 50px;
+  background-color: brown;
+  position: relative;
+}

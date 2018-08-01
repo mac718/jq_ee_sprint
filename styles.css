@@ -64,19 +64,19 @@
   float: left;
 }
 
-#play-btn {
+#play-btn, #dh-play-btn {
   text-align: center;
 }
 
-#play {
-  width: 100px;
-  height: 100px;
+#play, #dh-play {
+  width: 150px;
+  height: 150px;
   border-radius: 100%;
   margin-top: 20px;
   background-color: red;
 }
 
-#play-button-text {
+#play-button-text, #dh-play-button-text {
   font-weight: bold;
   font-size: 28px;
   color: white;
@@ -86,6 +86,7 @@
   width: 1000px;
   height: 1000px;
   background-color: lightGrey;
+  margin: auto;
 }
 
 #duck {

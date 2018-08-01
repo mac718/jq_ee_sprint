@@ -279,42 +279,51 @@ $(document).ready(function() {
     $(this).css('cursor', 'crosshair');
   });
 
-  $duck = $("<div id='duck'></div>");
-    $('#duck-hunt-board').append($duck);
-    $('#duck').animate({ right: "-=950"}, 6000).queue(function(){
-      $('#duck').remove();
-      $(this).dequeue();
-    });
-    $('#duck').click(function() {
-      $(this).clearQueue();
-      $(this).stop();
-      $(this).animate({ bottom: "-=500"}, 100).queue(function(){
-      $('#duck').remove();
-      $(this).dequeue();
-    });
-    });
+  var diagonal = function() {
+    yPosition = Math.floor(Math.random() * 950);
+    return $('#duck').animate({ top: yPosition, left: 950 }, 3000, 'linear');
+  }
 
-  setInterval( function(){ 
+  var zigZag = function() {
+    yPosition = Math.floor(Math.random() * 950);
+    return $('#duck').animate({ top: yPosition, left: 300 }, 2000, 'linear')
+                     .animate({ top: Math.floor(Math.random() * 950), left: 620 }, 2000, 'linear')
+                     .animate({ top: Math.floor(Math.random() * 950), left: 950 }, 2000, 'linear');
+  }
+  var straight = function() { 
+    return $('#duck').animate({ left: 950 }, 3000, 'linear');
+  }
+
+  var singleFlight = function() {
+    let yPosition = Math.floor(Math.random() * 950);
+
     $duck = $("<div id='duck'></div>");
+    $duck.css({top: yPosition});
+    
     $('#duck-hunt-board').append($duck);
-    $('#duck').animate({ right: "-=950"}, 6000).queue(function(){
+
+    let flightPaths = [diagonal, zigZag, straight];
+    let flightPath = flightPaths[Math.floor(Math.random() * 3)]
+    
+    flightPath().queue(function(){
       $('#duck').remove();
       $(this).dequeue();
     });
-    $('#duck').click(function() {
+    $('#duck').mousedown(function() {
       $(this).clearQueue();
       $(this).stop();
-      $(this).animate({ bottom: "-=500"}, 100).queue(function(){
-      $('#duck').remove();
-      $(this).dequeue();
+      $(this).animate({ top: $(this).position().top + (950 - ($(this).position().top - $('#duck-hunt-board').position().top))  }, 100).queue(function(){
+        $('#duck').remove();
+        $(this).dequeue();
+      });
     });
-    })
-    
-    //;
-  }, 6050);
+  }
 
-  
-  
+  $('#dh-play').click(function() {
+    singleFlight();
+    
+    setInterval( function(){ singleFlight(); }, 6050);
+  });
 
   characterCount($('#short_text'), 32, '#short_text_countdown');
   characterCount($('#long_text'), 140, '#long_text_countdown');
